@@ -7,4 +7,5 @@ A school project to make a camping site
 - git clone https://github.com/mjarkk/camping-site
 - cd camping-site
 - yarn
+- npm i -g nodemon
 - yarn run dev
