@@ -1,0 +1,89 @@
+<div class="booking">
+  <div class="step1 step" v-bind:class="{'disabled-step': BookingProcess != 1}">
+    <h1 class="step-title">Datum pannen</h1>
+    <div class="selector1 selector">
+      <h2 class="selector-title">Van</h2>
+      <date-picker @senddatum="datepicker($event)" meta="from" :blockedfrom="(today.month + 1) + '/' + today.day + '/' + today.year"></date-picker>
+    </div>
+    <div class="slector2 selector">
+      <h2 class="selector-title">Tot</h2>
+      <date-picker @senddatum="datepicker($event)" meta="to" :blockedfrom="DatePickerBlockedFrom"></date-picker>
+    </div>
+    <div class="options">
+      <button v-on:click="BookingProcess ++">Volgende</button>
+    </div>
+  </div>
+  <div class="step2 step" v-bind:class="{'disabled-step': BookingProcess != 2}">
+    <div class="preview">
+      <div
+      class="layer"
+      v-for="step in (TotalPlaces + 2)"
+      v-bind:class="{last: step == (TotalPlaces + 2)}"
+      v-bind:style="{
+        top: '-' + ((step - 1) * 100) + '%',
+        'background-image': (step != (TotalPlaces + 2)) ? 'url(' + ((step == 1) ? '/img/map/half-full.png' : '/img/map/plaats' + (step - 1) + '.png') + ')' : '',
+        opacity: ((typeof(bookinginf.StandingPlace) == 'string' && typeof(bookinginf.StandingPlaceHover) == 'string') || (bookinginf.StandingPlace == (step - 1) || bookinginf.StandingPlaceHover == (step - 1)) || step == (TotalPlaces + 2) || step == 1) ? '1' : '0.2'
+      }">
+      {{ (step == (TotalPlaces + 2)) ? 'Veld kiezen' : '' }}
+      </div>
+    </div>
+    <div class="place-selector">
+      <div class="place-title">Veld</div>
+      <div
+      class="place-select"
+      v-for="place in TotalPlaces"
+      v-bind:class="{'place-selected': place == bookinginf.StandingPlace}"
+      v-on:mouseover="bookinginf.StandingPlaceHover = place"
+      v-on:click="bookinginf.StandingPlace = place"
+      v-on:mouseleave="bookinginf.StandingPlaceHover = ''">
+        {{ place }}
+      </div>
+    </div>
+    <div class="options">
+      <button v-on:click="BookingProcess --">Vorige</button><button v-on:click="BookingProcess ++" v-bind:disabled="typeof(bookinginf.StandingPlace) == 'string'">Volgende</button>
+    </div>
+  </div>
+  <div class="step3 step" v-bind:class="{'disabled-step': BookingProcess != 3}">
+    <h1 class="step-title">Jou gegevens</h1>
+    <div class="inputs">
+      <div class="input">
+        <label for="naam">Naam</label>
+        <input id="naam" type="text" autocomplete="given-name" v-model="form.naam">
+      </div>
+      <div class="input">
+        <label for="achternaam">Achternaam</label>
+        <input type="text" id="achternaam" autocomplete="family-name" v-model="form.achternaam">
+      </div>
+      <div class="input">
+        <label for="tel">Tel nummer</label>
+        <input type="tel" id="tel" autocomplete="tel" v-model="form.tel">
+      </div>
+      <div class="input">
+        <label for="email">Email</label>
+        <input type="email" id="email" autocomplete="email" v-model="form.email">
+      </div>
+    </div>
+    <div class="options">
+      <button v-on:click="BookingProcess --">Vorige</button><button v-bind:disabled="form.naam == '' || form.achternaam == '' || form.tel == '' || form.email == ''" v-on:click="BookingProcess ++">Volgende</button>
+    </div>
+  </div>
+  <div class="step4 step" v-bind:class="{'disabled-step': BookingProcess != 4}">
+    <p>Plannen vanaf {{ bookinginf.FromDate }} tot {{ bookinginf.ToDate }}</p>
+    <p>Op veld {{ bookinginf.StandingPlace }}</p>
+    <p>Prijs: {{ totalprice }}</p>
+    <p>Als is allermaal klopt kunt u op booken drukken en dan doen wij de rest</p>
+    <div class="options">
+      <button v-on:click="BookingProcess --">Vorige</button><button v-on:click="BookingProcess ++">Booken</button>
+    </div>
+  </div>
+  <div class="loadingpopup" v-if="BookingProcess == 5">
+    <div class="container">
+      <div class="loading" v-bind:class="{'stage2': everytingdune}">
+        <div class="box"><div class="inside"></div></div>
+      </div>
+      <div class="dune" v-bind:class="{'stage2': everytingdune}">
+        <h3>Gelukt!</h3>
+      </div>
+    </div>
+  </div>
+</div>

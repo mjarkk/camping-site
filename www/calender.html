@@ -1,0 +1,40 @@
+<div class="calender-component">
+  <div class="popup">
+    <h1>{{ makdedate() }}</h1>
+    <div class="chooser">
+      <div class="year-picker">
+        <div class="selector" v-bind:disabled="blockfrom.year != today.year" v-bind:class="{selected: today.year == selected.year}" v-on:click="selected.year = today.year">{{ selected.year }}</div>
+        <div class="selector" v-bind:class="{selected: today.year + 1 == selected.year}" v-on:click="selected.year = today.year + 1">{{ selected.year + 1 }}</div>
+      </div>
+      <div class="month-picker">
+        <div
+        class="month selector"
+        v-bind:disabled="(month <= blockfrom.month && blockfrom.year == selected.year) || (blockfrom.year > selected.year)"
+        v-bind:class="{selected: month == selected.month}"
+        v-for="month in months"
+        v-on:click="selected.month = month">{{ month }}</div>
+      </div>
+      <div class="day-picker">
+        <div
+          v-bind:style="{
+            'grid-column-start': getDay(day) + 1,
+            'grid-column-end': getDay(day) + 1,
+            'grid-row-start': Math.ceil((day + getDay(1)) / 7),
+            'grid-row-end': Math.ceil((day + getDay(1)) / 7)
+          }"
+          class="daywrapper"
+          v-for="day in daysInMonth()">
+          <div
+            class="day selector"
+            v-bind:disabled="(day < blockfrom.day && selected.month <= blockfrom.month + 1 && blockfrom.year == selected.year) || (selected.month <= blockfrom.month && blockfrom.year == selected.year) || (blockfrom.year > selected.year)"
+            v-bind:class="{selected: day == selected.day}"
+            v-on:click="selected.day = day">{{ day }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="options" v-if="submittext">
+      <button class="optionbtn">{{ submittext }}</button>
+    </div>
+  </div>
+</div>

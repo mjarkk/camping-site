@@ -1,0 +1,53 @@
+<div class="admin-pannel">
+  <h1>Admin</h1>
+  <div class="Tabs">
+    <button v-on:click="tab = 'bookingen'">Bookingen</button>
+    <button v-on:click="tab = 'velden'">Velden</button>
+  </div>
+  <div class="tabs-content">
+    <div class="tab" v-if="tab == 'bookingen'">
+      <h3>Bookingen</h3>
+      <div class="content">
+        <div class="booking booking-header">
+          <div class="row">
+            <p class="id">id</p>
+            <p class="name">naam</p>
+            <p class="from">from</p>
+            <p class="to">to</p>
+            <p class="place">place</p>
+          </div>
+        </div>
+        <div v-for="(booking, id) in bookings" class="booking">
+          <div class="row" v-bind:class="{active: detialsopen == id}" v-on:click="(detialsopen != id) ? detialsopen = id : detialsopen = undefined">
+            <p class="id">{{ id + 1 }}</p>
+            <p class="name">{{ booking.name.last + ', ' + booking.name.first }}</p>
+            <p class="from">{{ booking.booking.from }}</p>
+            <p class="to">{{ booking.booking.to }}</p>
+            <p class="place">{{ booking.booking.place }}</p>
+          </div>
+          <div class="moreinf" v-if="detialsopen == id">
+            <div class="side1">
+              <h3>Gegevens</h3>
+              <p class="voornaam">Voornaam: <b>{{ booking.name.first }}</b></p>
+              <p class="achternaam">Achternaam: <b>{{ booking.name.last }}</b></p>
+              <p class="from">Vanaf: <b>{{ booking.booking.from }}</b></p>
+              <p class="to">Tot: <b>{{ booking.booking.to }}</b></p>
+              <p class="email">Email: <a :href="'mailto:' + booking.email">{{ booking.email }}</a></p>
+              <p class="tel">Tel: <a :href="'tel:' + booking.tel">{{ booking.tel }}</a></p>
+            </div>
+            <div class="side2">
+              <h3>Plaats: {{ booking.booking.place }}</h3>
+              <div class="previewimg">
+                <div class="base"></div>
+                <div class="where" v-bind:style="{'background-image': 'url(/img/map/plaats' + booking.booking.place + '.png)'}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab" v-if="tab == 'velden'">
+      <h3>Velden</h3>
+    </div>
+  </div>
+</div>

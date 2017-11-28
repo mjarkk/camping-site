@@ -1,0 +1,59 @@
+<% include top.ejs %>
+<div class="header">
+  <h1>{{ text }}</h1>
+</div>
+<div class="main">
+  <div class="side-links">
+    <h2 class="title">Links</h2>
+    <a v-if="!link.href.startsWith(currentsite) || (currentsite == '/' && link.href != currentsite)" v-bind:href="link.href" v-for='link in links'><i class="material-icons">{{ link.icon }}</i>{{ link.title }}</a>
+  </div>
+  <div class="rest">
+    <%if (page == 'home') { %>
+      <div class="title">
+        <div class="img"></div>
+      </div>
+      <div class="content-header">
+        <h1>Camping site</h1>
+      </div>
+      <div class="content-block">
+        <h2><i class="material-icons">info</i>INFO</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <a href="/info">Meer info</a>
+      </div>
+    <% } else if (page == 'info') { %>
+      <h3 class="info-title">Camping info</h3>
+      <div class="content-block">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="bigimg">
+        <div class="img" style="background-image: url(/img/voorbeeld3.jpg)"></div>
+      </div>
+      <div class="content-block">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="bigimg">
+        <div class="img" style="background-image: url(/img/voorbeeld1.jpg)"></div>
+      </div>
+    <% } else if (page == 'booking') { %>
+      <% include booking.ejs %>
+    <% } else if (page == 'login') { %>
+      <div class="login-block">
+        <h1>Login</h1>
+        <div class="inputs">
+          <div class="input">
+            <label for="uname">Username</label>
+            <input id="uname" type="text" name="uname" required v-model="username">
+          </div>
+          <div class="input">
+            <label for="psw">Password</label>
+            <input id="psw" type="password" name="psw" required v-model="password">
+          </div>
+        </div>
+        <button v-on:click="trylogin()">Login</button>
+      </div>
+    <% } else if (page == 'admin') { %>
+      <% include adminpage.ejs %>
+    <% } %>
+  </div>
+</div>
+<% include bottom.ejs %>

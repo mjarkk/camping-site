@@ -1,0 +1,499 @@
+// https://material.io/color/#!/?view.left=0&view.right=0&primary.color=FFA726&secondary.color=3949AB
+
+*
+  margin: 0px
+  padding: 0px
+  font-family: 'Roboto', sans-serif
+
+body
+  font-size: 18px
+  background-color: #eee
+
+.header
+  background-color: #FFA726
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+  h1
+    font-weight: 400
+    padding: 10px 20px
+
+.main
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  .side-links
+    min-width: 200px
+    box-sizing: border-box
+    padding-bottom: 20px
+    h2.title
+      font-size: 30px
+      font-weight: 400
+      padding: 15px 0px 5px 40px
+      box-sizing: border-box
+    a
+      display: inline-block
+      width: 100%
+      box-sizing: border-box
+      padding: 5px 0px 5px 40px
+      color: black
+      text-decoration: none
+      cursor: pointer
+      i
+        position: relative
+        top: 6px
+        color: #3949AB
+  .rest
+    width: 100%
+    .info-title
+      padding: 30px 50px 20px 50px
+      box-sizing: border-box
+      font-size: 40px
+    .bigimg
+      display: flex
+      justify-content: center
+      align-items: center
+      display: -webkit-flex
+      -webkit-justify-content: center
+      -webkit-align-items: center
+      overflow: hidden
+      height: 300px
+      width: 100%
+      padding: 20px 0px
+      .img
+        height: 100%
+        width: 100%
+        max-width: 600px
+        background-size: cover
+        background-position: center
+        border-radius: 4px
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    .title
+      width: 100%
+      height: 300px
+      background-image: url('/img/voorbeeld1.jpg')
+      background-size: cover
+      background-position: 50% 70%
+      .img
+        height: 100%
+        width: 100%
+        background: -moz-linear-gradient(top, rgba(238,238,238,0) 0%, rgba(238,238,238,1) 100%)
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(238,238,238,0)), color-stop(100%, rgba(238,238,238,1)))
+        background: -webkit-linear-gradient(top, rgba(238,238,238,0) 0%, rgba(238,238,238,1) 100%)
+    .content-header
+      h1
+        text-align: center
+        position: relative
+        top: -20px
+        font-size: 40px
+    .content-block
+      margin: 10px
+      padding: 20px
+      background-color: white
+      border-radius: 4px
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+      h2
+        padding-bottom: 8px
+        i
+          position: relative
+          top: 2px
+          margin-right: 2px
+      a
+        padding: 10px 20px
+        background-color: #3949AB
+        display: inline-block
+        margin-top: 10px
+        color: white
+        cursor: pointer
+        text-decoration: none
+        border-radius: 4px
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+        transition: box-shadow 0.3s cubic-bezier(.25,.8,.25,1)
+        &:hover
+          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+.booking
+  .step
+    opacity: 1
+    transition: opacity 0.3s
+  .disabled-step
+    opacity: 0.25
+    pointer-events: none
+    *
+      pointer-events: none
+  .step1
+    display: flex
+    flex-wrap: wrap
+    display: -webkit-flex
+    -webkit-flex-wrap: wrap
+    padding: 20px
+    .step-title
+      width: 100%
+    .selector
+      padding-top: 20px
+      .selector-title
+        padding-left: 10px
+  .options
+    width: 100%
+    box-sizing: border-box
+    padding: 20px 10px
+    button
+      padding: 10px 20px
+      background-color: #3949AB
+      border: 0px
+      color: white
+      border-radius: 4px
+      font-size: 20px
+      cursor: pointer
+      opacity: 1
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+      transition: box-shadow 0.3s cubic-bezier(.25,.8,.25,1), opacity 0.3s
+      margin-right: 5px
+      &:hover
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+      &:disabled
+        opacity: 0.3
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+        cursor: not-allowed
+  .step2
+    display: flex
+    flex-direction: column
+    display: -webkit-flex
+    -webkit-flex-direction: column
+    .preview
+      height: 443px
+      width: 654px
+      max-height: 443px
+      max-width: 654px
+      display: inline-block
+      overflow: hidden
+      .layer
+        position: relative
+        height: 100%
+        width: 100%
+        opacity: 1
+        transition: opacity 0.3s
+        background-position: center
+        background-size: contain
+        background-repeat: no-repeat
+      .last
+        font-size: 40px
+        box-sizing: border-box
+        padding: 15px
+        font-weight: 600
+    .place-selector
+      position: relative
+      bottom: 15px
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      display: -webkit-flex
+      -webkit-flex-direction: row
+      -webkit-flex-wrap: wrap
+      .place-title
+        font-size: 35px
+        display: inline-block
+        padding-right: 5px
+      .place-select
+        position: relative
+        top: 5px
+        display: inline-block
+        height: 30px
+        width: 30px
+        background-color: #fff
+        margin: 2px
+        display: flex
+        justify-content: center
+        align-items: center
+        display: -webkit-flex
+        -webkit-justify-content: center
+        -webkit-align-items: center
+        cursor: pointer
+        -webkit-touch-callout: none
+        -webkit-user-select: none
+        user-select: none
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12)
+        border-radius: 50px
+        font-size: 20px
+      .place-selected
+        background-color: #3949AB
+        color: white
+  .step3
+    .inputs
+      padding-top: 10px
+      display: flex
+      flex-wrap: wrap
+      display: -webkit-flex
+      -webkit-flex-wrap: wrap
+      .input
+        display: flex
+        flex-direction: column
+        display: -webkit-flex
+        -webkit-flex-direction: column
+        padding: 5px
+        label
+          font-size: 20px
+          color: #00227b
+          font-weight: 700
+        input
+          background-color: #eee
+          border: 0px
+          border-bottom: 2px solid #00227b
+          box-sizing: border-box
+          padding: 5px
+          font-size: 19px
+  .loadingpopup
+    position: fixed
+    top: 0px
+    left: 0px
+    height: 100vh
+    width: 100vw
+    background-color: rgba(255, 255, 255, 0.4)
+    display: flex
+    justify-content: center
+    align-items: center
+    display: -webkit-flex
+    -webkit-justify-content: center
+    -webkit-align-items: center
+    .container
+      height: 350px
+      width: 350px
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+      background-color: white
+      border-radius: 4px
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-direction: column
+      display: -webkit-flex
+      -webkit-justify-content: center
+      -webkit-align-items: center
+      -webkit-flex-direction: column
+      .loading
+        opacity: 1
+        top: 30px
+        .box
+          -webkit-animation: animation1 5s infinite
+          animation: animation1 5s infinite
+          height: 50px
+          width: 50px
+          background-color: #00227b
+          display: flex
+          justify-content: center
+          align-items: center
+          display: -webkit-flex
+          -webkit-justify-content: center
+          -webkit-align-items: center
+          border-radius: 4px
+          .inside
+            display: inline-block
+            min-height: 20px
+            min-width: 20px
+            background-color: white
+            border-radius: 4px
+            -webkit-animation: animation2 5s infinite
+            animation: animation2 5s infinite
+      .dune
+        padding-top: 30px
+        opacity: 0
+        top: 50px
+        h3
+          font-size: 40px
+          color: rgb(20, 173, 53)
+      .loading.stage2
+        top: -50px
+        opacity: 0
+      .dune.stage2
+        top: -40px
+        opacity: 1
+      .dune, .loading
+        position: relative
+        transition: opacity .5s, top .4s
+@keyframes animation1
+  0%
+    -webkit-transform: rotate(0deg)
+    transform: rotate(0deg)
+  25%
+    -webkit-transform: rotate(90deg)
+    transform: rotate(90deg)
+  50%
+    -webkit-transform: rotate(180deg)
+    transform: rotate(180deg)
+  75%
+    -webkit-transform: rotate(270deg)
+    transform: rotate(270deg)
+  100%
+    -webkit-transform: rotate(360deg)
+    transform: rotate(360deg)
+
+@keyframes animation2
+  0%
+    -webkit-transform: scale(0.8,0.8)
+    transform: scale(0.8,0.8)
+  25%
+    -webkit-transform: scale(1.7,1.7)
+    transform: scale(1.7,1.7)
+  50%
+    -webkit-transform: scale(0.8,0.8)
+    transform: scale(0.8,0.8)
+  75%
+    -webkit-transform: scale(1.7,1.7)
+    transform: scale(1.7,1.7)
+  100%
+    -webkit-transform: scale(0.8,0.8)
+    transform: scale(0.8,0.8)
+.login-block
+  margin: 10px
+  padding: 20px
+  background-color: white
+  border-radius: 4px
+  max-width: 600px
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  .inputs
+    padding-top: 10px
+    display: flex
+    flex-wrap: wrap
+    display: -webkit-flex
+    -webkit-flex-wrap: wrap
+  .input
+    display: flex
+    flex-direction: column
+    display: -webkit-flex
+    -webkit-flex-direction: column
+    padding: 5px
+    label
+      font-size: 20px
+      color: #00227b
+      font-weight: 700
+    input
+      background-color: white
+      border: 0px
+      border-bottom: 2px solid #00227b
+      box-sizing: border-box
+      padding: 5px
+      font-size: 19px
+  button
+    padding: 10px 20px
+    background-color: #3949AB
+    border: 0px
+    color: white
+    border-radius: 4px
+    font-size: 20px
+    cursor: pointer
+    opacity: 1
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+    transition: box-shadow 0.3s cubic-bezier(.25,.8,.25,1), opacity 0.3s
+    margin: 5px
+    &:hover
+      box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+
+.admin-pannel
+  margin: 10px
+  padding: 20px
+  background-color: white
+  border-radius: 4px
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)
+  .Tabs
+    button
+      border: 0px
+      padding: 5px 15px
+      font-size: 20px
+      background-color: #3949AB
+      color: white
+      border-radius: 4px
+      cursor: pointer
+  .tabs-content
+    padding-top: 10px
+    margin-top: 10px
+    border-top: 1px solid #ccc
+    .tab
+      .content
+        .booking
+          .row
+            display: flex
+            display: -webkit-flex
+            border-bottom: 1px solid #ccc
+            cursor: pointer
+            .id,.name,.from,.to,.place
+              padding: 5px 10px
+              overflow: hidden
+              box-sizing: border-box
+              max-height: 30px
+            .id
+              font-weight: 600
+              width: 25px
+            .name
+              width: 100px
+            .from, .to
+              min-width: 120px
+              max-width: 120px
+          .active
+            background-color: #eee
+          .moreinf
+            border-bottom: 1px solid #ccc
+            display: flex
+            flex-wrap: wrap
+            justify-content: space-between
+            display: -webkit-flex
+            -webkit-flex-wrap: wrap
+            -webkit-justify-content: space-between
+            .side1,.side2
+              width: 50%
+              min-width: 350px
+              box-sizing: border-box
+              padding: 20px
+            .side2
+              .previewimg
+                height: 170px
+                width: 100%
+                .base,.where
+                  width: 100%
+                  height: 100%
+                  background-position: center
+                  background-size: contain
+                  background-repeat: no-repeat
+                .base
+                  background-image: url('/img/map/half-full.png')
+                .where
+                  position: relative
+                  top: -100%
+
+@media screen and (max-width: 1000px)
+  .header
+    z-index: 2
+    position: relative
+  .main
+    flex-direction: column
+    .side-links
+      display: flex
+      justify-content: center
+      align-items: center
+      z-index: 2
+      h2
+        display: none
+      a
+        width: auto
+        max-width: auto
+        min-width: auto
+        padding-left: 10px
+        padding-top: 20px
+        font-size: 20px
+    .rest
+      .title
+        position: relative
+        top: -80px
+        z-index: 1
+    .content-header h1
+      top: -50px
+
+@media screen and (max-width: 680px)
+  .rest .booking .step2 .preview
+    height: 300px
+    width: 450px
+
+@media screen and (max-width: 480px)
+  .rest .booking .step2 .preview
+    height: 300px
+    width: 400px
+
+@media screen and (max-width: 480px)
+  .rest .booking .step2 .preview
+    height: 300px
+    width: 300px
