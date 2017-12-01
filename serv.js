@@ -1,7 +1,8 @@
-let DBoptions = {
-  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
-  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
-};
+let GlobalPrices = {
+  dog: 10,
+  day: 7.50,
+  tent: 2
+}
 
 const fs = require('fs-extra')
 const colors = require('colors')
@@ -18,6 +19,7 @@ const request = require('request')
 const ejs = require('ejs')
 const path = require('path')
 const CryptoJS = require('crypto-js')
+const moment = require('moment')
 const MongoClient = require('mongodb').MongoClient
 
 // some config shilz
@@ -60,30 +62,43 @@ app.use(cookieParser(randomstring.generate(200)))
 // index
 app.get('/', function(req, res){
   res.render('index.ejs', {
-    page: 'home'
+    page: 'home',
+    prijzen: JSON.stringify(GlobalPrices)
   });
 });
 
 // info page
 app.get('/info', function(req, res){
   res.render('index.ejs', {
-    page: 'info'
+    page: 'info',
+    prijzen: JSON.stringify(GlobalPrices)
   });
 });
 
 // activitijten page
 app.get('/activitijten', function(req, res){
   res.render('index.ejs', {
-    page: 'activitijten'
+    page: 'activitijten',
+    prijzen: JSON.stringify(GlobalPrices)
   });
 });
 
 // booking page
 app.get('/booking', function(req, res){
   res.render('index.ejs', {
-    page: 'booking'
+    page: 'booking',
+    prijzen: JSON.stringify(GlobalPrices)
   });
 });
+
+// Prices page
+app.get('/prijzen', function(req, res) {
+  res.render('index.ejs', {
+    page: 'prijzen',
+    prijzen: JSON.stringify(GlobalPrices)
+  });
+})
+
 
 // login page
 app.get('/login',function(req,res) {
@@ -92,7 +107,8 @@ app.get('/login',function(req,res) {
     res.redirect('/admin');
   } else {
     res.render('index.ejs', {
-      page: 'login'
+      page: 'login',
+      prijzen: JSON.stringify(GlobalPrices)
     });
   }
 })
@@ -102,7 +118,8 @@ app.get('/admin',function(req,res) {
   let username = req.signedCookies.username;
   if (username) {
     res.render('index.ejs', {
-      page: 'admin'
+      page: 'admin',
+      prijzen: JSON.stringify(GlobalPrices)
     })
   } else {
     res.clearCookie('username');
@@ -188,26 +205,38 @@ app.post('/bookingdata',function(req,res) {
 // book a place
 app.post('/sendmessagedetails',function(req,res) {
   let b = req.body
-  if (b.form &&
-  b.form.naam &&
-  b.form.achternaam &&
-  b.form.tel &&
-  b.form.email &&
-  b.bookinginfo &&
-  b.bookinginfo.StandingPlace &&
-  b.bookinginfo.FromDate &&
-  b.bookinginfo.ToDate) {
+  if (typeof(b.form) == 'object' &&
+  typeof(b.form.naam) == 'string' &&
+  typeof(b.form.achternaam) == 'string' &&
+  typeof(b.form.tel) == 'string' &&
+  typeof(b.form.email) == 'string' &&
+  typeof(b.form.dog) == 'boolean' &&
+  typeof(b.form.tent) == 'boolean' &&
+  typeof(b.bookinginfo) == 'object' &&
+  typeof(b.bookinginfo.StandingPlace) == 'number' &&
+  typeof(b.bookinginfo.FromDate) == 'string' &&
+  typeof(b.bookinginfo.ToDate) == 'string' &&
+  moment(b.bookinginfo.FromDate, "MM/DD/YYYY", true).isValid() &&
+  moment(b.bookinginfo.ToDate, "MM/DD/YYYY", true).isValid()) {
+    let days = (Math.floor(( Date.parse(b.bookinginfo.ToDate) - Date.parse(b.bookinginfo.FromDate) ) / 86400000) + 1)
+    let priceperday = days * GlobalPrices.day
+    let dog = (b.form.dog) ? GlobalPrices.dog : 0
+    let tent = (b.form.tent) ? GlobalPrices.tent * days : 0
+    let totalprice = (priceperday + dog + tent).toFixed(2)
     db.collection("customers").insertOne({
       name: {
         first: b.form.naam,
         last: b.form.achternaam
       },
+      totalprice: totalprice,
       tel: b.form.tel,
       email: b.form.email,
       booking: {
         from: b.bookinginfo.FromDate,
         to: b.bookinginfo.ToDate,
-        place: b.bookinginfo.StandingPlace
+        place: b.bookinginfo.StandingPlace,
+        dog: b.form.dog,
+        tent: b.form.tent
       },
       NumberDateFrom: timetonumbers(b.bookinginfo.FromDate),
       NumberDateTo: timetonumbers(b.bookinginfo.ToDate)

@@ -62,6 +62,18 @@
         <label for="email">Email</label>
         <input type="email" id="email" autocomplete="email" v-model="form.email">
       </div>
+      <div class="input">
+        <label for="dog">Hond</label>
+        <div class="clicky" id="dog" v-on:click="form.dog = !form.dog" v-bind:class="{active: form.dog}">
+          <div class="inside"></div>
+        </div>
+      </div>
+      <div class="input">
+        <label for="tent">Extra tent</label>
+        <div class="clicky" id="tent" v-on:click="form.tent = !form.tent" v-bind:class="{active: form.tent}">
+          <div class="inside"></div>
+        </div>
+      </div>
     </div>
     <div class="options">
       <button v-on:click="BookingProcess --">Vorige</button><button v-bind:disabled="form.naam == '' || form.achternaam == '' || form.tel == '' || form.email == ''" v-on:click="BookingProcess ++">Volgende</button>

@@ -1,9 +1,9 @@
 <% include top.ejs %>
 <div class="header">
-  <h1>{{ text }}</h1>
+  <h1 v-cloak>{{ text }}</h1>
 </div>
 <div class="main">
-  <div class="side-links">
+  <div class="side-links" v-cloak>
     <h2 class="title">Links</h2>
     <a v-if="!link.href.startsWith(currentsite) || (currentsite == '/' && link.href != currentsite)" v-bind:href="link.href" v-for='link in links'><i class="material-icons">{{ link.icon }}</i>{{ link.title }}</a>
   </div>
@@ -53,6 +53,15 @@
       </div>
     <% } else if (page == 'admin') { %>
       <% include adminpage.ejs %>
+    <% } else if (page == 'prijzen') { %>
+      <div class="content-block prijzen-block">
+        <h2><i class="material-icons">info</i>Prijzen</h2>
+        <div class="list">
+          <div class="listitem">Per dag: <b>€{{ prices.day.toFixed(2) }}</b> Per dag</div>
+          <div class="listitem">Extra tent: <b>€{{ prices.tent.toFixed(2) }}</b> Per dag</div>
+          <div class="listitem">Hond: <b>€{{ prices.dog.toFixed(2) }}</b> Eenmaalig</div>
+        </div>
+      </div>
     <% } %>
   </div>
 </div>

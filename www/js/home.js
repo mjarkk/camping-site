@@ -1,3 +1,5 @@
+let GlobalPrices = window.GlobalPrices
+
 function daysInMonth(month, year){
   return month == 2 ? (year %4 ? 28 : (year %100 ? 29 : (year %400 ? 28 :29))) : ((month -1) %7% 2 ? 30 :31);
 }
@@ -120,6 +122,11 @@ let links = new Vue({
         href: '/activitijten',
         icon: 'local_activity',
         title: 'Activitijten'
+      },
+      {
+        href: '/prijzen',
+        icon: 'attach_money',
+        title: 'prijzen'
       }
     ]
   }
@@ -205,6 +212,15 @@ if (document.querySelector(".login-block")) {
   // console.log(CryptoJS.AES.encrypt('Message', 'Secret Passphrase').toString());
 }
 
+if (document.querySelector('.prijzen-block')) {
+  let prijzen = new Vue({
+    el: '.prijzen-block',
+    data: {
+      prices: GlobalPrices
+    }
+  })
+}
+
 if (document.querySelector(".admin-pannel")) {
   let AdminPannel = new Vue({
     el: '.admin-pannel',
@@ -288,6 +304,7 @@ if (document.querySelector(".booking")) {
       BookingProcess: 1,
       totalprice: 0,
       everytingdune: false,
+      prices: GlobalPrices,
       bookinginf: {
         FromDate: '',
         ToDate: '',
@@ -295,6 +312,8 @@ if (document.querySelector(".booking")) {
         StandingPlaceHover: ''
       },
       form: {
+        dog: false,
+        tent: false,
         naam: '',
         achternaam: '',
         tel: '',
@@ -329,6 +348,13 @@ if (document.querySelector(".booking")) {
     watch: {
       BookingProcess: function(n) {
         let vm = this;
+        if (n == 4) {
+          let days = (Math.floor(( Date.parse(vm.bookinginf.ToDate) - Date.parse(vm.bookinginf.FromDate) ) / 86400000) + 1)
+          let priceperday = days * vm.prices.day
+          let dog = (vm.form.dog) ? vm.prices.dog : 0
+          let tent = (vm.form.tent) ? vm.prices.tent * days : 0
+          vm.totalprice = (priceperday + dog + tent).toFixed(2)
+        }
         if (n == 1 || n == 2 || n == 3 || n == 4 ) {
           document.querySelector('.booking .step' + n).scrollIntoView({ behavior: 'smooth' })
         } else if (n == 5) {
